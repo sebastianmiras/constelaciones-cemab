@@ -3,6 +3,8 @@
   const nodesFile = body.dataset.nodes;
   const edgesFile = body.dataset.edges;
   const youtubeUrl = body.dataset.youtube;
+  const secondaryYoutubeUrl = body.dataset.youtubeSecondary || "";
+  const secondaryStart = body.dataset.secondaryStart ? toSecondsSafe(body.dataset.secondaryStart) : null;
   const viz = document.querySelector("#viz");
   const colors = {
     "Didácticas": "#d9ff43",
@@ -11,12 +13,19 @@
     "Biográficas": "#5cc8ff"
   };
   const normalize = value => (value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  const toSeconds = value => (value || "0").split(":").reduce((total, part) => total * 60 + Number(part), 0);
+  function toSecondsSafe(value) { return (value || "0").split(":").reduce((total, part) => total * 60 + Number(part), 0); }
+  const toSeconds = toSecondsSafe;
   const shortTime = value => (value || "").replace(/^00:/, "");
-  const timedUrl = time => {
-    const separator = youtubeUrl.includes("?") ? "&" : "?";
-    return `${youtubeUrl}${separator}t=${toSeconds(time)}`;
+  const timedUrl = node => {
+    const globalTime = toSeconds(node.start_time);
+    const useSecondary = secondaryYoutubeUrl && secondaryStart !== null && globalTime >= secondaryStart;
+    const targetUrl = useSecondary ? secondaryYoutubeUrl : youtubeUrl;
+    const targetTime = useSecondary ? Math.max(0, globalTime - secondaryStart) : globalTime;
+    const separator = targetUrl.includes("?") ? "&" : "?";
+    return `${targetUrl}${separator}t=${targetTime}`;
   };
+
+  const isInterviewee = node => node.type === "interviewee" || node.type === "author";
 
   let svg, zoom, graphLayer, nodes, links, nodeEls, labelEls, linkEls;
 
@@ -48,8 +57,8 @@
 
     nodeEls = graphLayer.append("g").selectAll("circle").data(nodes).join("circle")
       .attr("class", "node")
-      .attr("r", d => d.type === "interviewee" ? 24 : d.type === "category" ? 16 : 6)
-      .attr("fill", d => d.type === "interviewee" ? "#f0eee7" : colors[d.group] || "#a9a9a9")
+      .attr("r", d => isInterviewee(d) ? 24 : d.type === "category" ? 16 : 6)
+      .attr("fill", d => isInterviewee(d) ? "#f0eee7" : colors[d.group] || "#a9a9a9")
       .attr("tabindex", d => d.type === "reference" ? 0 : -1)
       .attr("role", d => d.type === "reference" ? "button" : null)
       .attr("aria-label", d => d.type === "reference" ? d.label : null)
@@ -58,7 +67,7 @@
       .call(d3.drag().on("start", dragStart).on("drag", dragged).on("end", dragEnd));
 
     labelEls = graphLayer.append("g").selectAll("text").data(nodes).join("text")
-      .attr("class", d => `node-label ${d.type === "category" ? "category-label" : ""} ${d.type === "interviewee" ? "interviewee-label" : ""}`)
+      .attr("class", d => `node-label ${d.type === "category" ? "category-label" : ""} ${isInterviewee(d) ? "interviewee-label" : ""}`)
       .attr("text-anchor", d => d.type === "reference" ? "start" : "middle")
       .attr("dx", d => d.type === "reference" ? 10 : 0)
       .attr("dy", d => d.type === "reference" ? 3 : d.type === "category" ? 30 : 39)
@@ -66,7 +75,7 @@
 
     const simulation = d3.forceSimulation(nodes)
       .force("link", d3.forceLink(links).id(d => d.id).distance(d => d.relation === "has_category" ? 155 : 80).strength(d => d.relation === "has_category" ? .9 : .65))
-      .force("charge", d3.forceManyBody().strength(d => d.type === "interviewee" ? -1000 : d.type === "category" ? -560 : -105))
+      .force("charge", d3.forceManyBody().strength(d => isInterviewee(d) ? -1000 : d.type === "category" ? -560 : -105))
       .force("center", d3.forceCenter(width / 2, height / 2))
       .force("collision", d3.forceCollide().radius(d => d.type === "reference" ? 17 : 35))
       .force("x", d3.forceX(width / 2).strength(.035))
@@ -95,7 +104,7 @@
     document.querySelector("#panel-title").textContent = d.label;
     document.querySelector("#panel-note").textContent = d.note || "Sin contexto breve disponible.";
     document.querySelector("#panel-time").textContent = `${shortTime(d.start_time)} — ${shortTime(d.end_time)}`;
-    document.querySelector("#panel-youtube").href = timedUrl(d.start_time);
+    document.querySelector("#panel-youtube").href = timedUrl(d);
     document.querySelector("#panel").style.setProperty("--node-color", colors[d.group]);
     const referenceIndex = nodes.filter(node => node.type === "reference").findIndex(node => node.id === d.id) + 1;
     const referenceTotal = nodes.filter(node => node.type === "reference").length;
