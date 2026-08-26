@@ -6,5 +6,13 @@
     "file": "andruetto/andruetto_constelacion.html",
     "thumb": "img/andruetto.png",
     "tags": ["Andruetto", "Argentina", "literatura", "educación"]
+  },
+  {
+    "id": "benedetti",
+    "name": "Mario Benedetti",
+    "role": "Escritor · Uruguay",
+    "file": "benedetti/benedetti_constelacion.html",
+    "thumb": "img/benedetti.png",
+    "tags": ["Benedetti", "Uruguay", "literatura", "historia"]
   }
 ]
