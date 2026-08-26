@@ -20,7 +20,9 @@
 
   let svg, zoom, graphLayer, nodes, links, nodeEls, labelEls, linkEls;
 
-  Promise.all([d3.csv(nodesFile), d3.csv(edgesFile)])
+  const loadCsv = path => d3.text(path).then(text => d3.csvParse(text.replace(/^\uFEFF/, "")));
+
+  Promise.all([loadCsv(nodesFile), loadCsv(edgesFile)])
     .then(([nodeData, edgeData]) => {
       nodes = nodeData;
       links = edgeData;
@@ -96,7 +98,8 @@
     document.querySelector("#panel-youtube").href = timedUrl(d.start_time);
     document.querySelector("#panel").style.setProperty("--node-color", colors[d.group]);
     const referenceIndex = nodes.filter(node => node.type === "reference").findIndex(node => node.id === d.id) + 1;
-    document.querySelector("#panel-count").textContent = `${String(referenceIndex).padStart(2, "0")} / 50`;
+    const referenceTotal = nodes.filter(node => node.type === "reference").length;
+    document.querySelector("#panel-count").textContent = `${String(referenceIndex).padStart(2, "0")} / ${String(referenceTotal).padStart(2, "0")}`;
     nodeEls.classed("match", node => node.id === d.id);
   }
 
