@@ -19,6 +19,8 @@ body { margin: 0; color: var(--text); background: var(--bg); font-family: "Manro
 .back { justify-self: start; display: flex; gap: 10px; align-items: center; }
 .back span { font-size: 17px; }
 .full-video { justify-self: end; border-bottom: 1px solid var(--acid); padding-bottom: 5px; }
+.video-parts { justify-self: end; display: flex; align-items: center; gap: 14px; }
+.video-parts .full-video { justify-self: auto; }
 .graph-title { text-align: center; }
 .graph-title span { color: var(--muted); font: 9px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .12em; }
 .graph-title h1 { margin: 2px 0 0; font: 400 24px "Newsreader", serif; letter-spacing: -.02em; }
@@ -65,7 +67,7 @@ body { margin: 0; color: var(--text); background: var(--bg); font-family: "Manro
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (max-width: 850px) {
   body { overflow: auto; }
-  .graph-header { grid-template-columns: auto 1fr auto; padding: 0 15px; }.graph-title h1 { font-size: 19px; }.full-video { font-size: 0; }.full-video span { font-size: 15px; }
+  .graph-header { grid-template-columns: auto 1fr auto; padding: 0 15px; }.graph-title h1 { font-size: 19px; }.full-video { font-size: 0; }.full-video span { font-size: 15px; }.video-parts { gap: 8px; }
   .graph-shell { grid-template-columns: 1fr; grid-template-rows: 62vh auto; height: auto; }.viz { min-height: 500px; }.context-panel { border-left: 0; border-top: 1px solid var(--line); min-height: 38vh; }.panel-empty { min-height: 300px; }.legend { max-width: calc(100% - 48px); overflow-x: auto; }.legend p { display: none; }
 }
 @media (max-width: 500px) { .graph-title span { display: none; }.graph-title h1 { font-size: 17px; }.legend { gap: 10px; }.legend span { font-size: 0; }.legend span i { width: 10px; height: 10px; }.context-panel { padding: 22px; } }
