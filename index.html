@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="description" content="Constelaciones interactivas construidas a partir de entrevistas del Centro Mario Benedetti.">
+  <title>Constelaciones CEMAB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Constelaciones CEMAB, inicio">
+      <span class="brand-mark" aria-hidden="true">✦</span>
+      <span>Constelaciones <i>CEMAB</i></span>
+    </a>
+    <p class="edition">Archivo de entrevistas · 2026</p>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Literatura · memoria · conversación</p>
+        <h1 id="hero-title">Cada entrevista<br>es un <em>universo.</em></h1>
+      </div>
+      <div class="hero-orbit" aria-hidden="true">
+        <span class="orbit orbit-a"></span>
+        <span class="orbit orbit-b"></span>
+        <span class="orbit orbit-c"></span>
+        <span class="orbit-core">13</span>
+        <span class="orbit-caption">voces<br>en relación</span>
+      </div>
+      <p class="intro">Una cartografía interactiva de referentes, experiencias, obras e ideas presentes en las entrevistas del Centro Mario Benedetti.</p>
+    </section>
+
+    <section class="archive" aria-labelledby="archive-title">
+      <div class="archive-head">
+        <div>
+          <p class="section-index">01 — Archivo</p>
+          <h2 id="archive-title">Explorar constelaciones</h2>
+        </div>
+        <label class="search">
+          <span class="sr-only">Buscar entrevista</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+          <input id="search" type="search" placeholder="Buscar una voz…" autocomplete="off">
+        </label>
+      </div>
+      <div id="grid" class="portrait-grid" aria-live="polite"></div>
+      <p id="empty" class="empty" hidden>No encontramos ninguna entrevista con ese nombre.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Constelaciones literarias</p>
+    <p>Centro Mario Benedetti · Universidad de Alicante</p>
+  </footer>
+
+  <template id="card-template">
+    <a class="portrait-card">
+      <div class="portrait-visual">
+        <img alt="" loading="lazy">
+        <span class="portrait-placeholder" aria-hidden="true"></span>
+        <span class="card-arrow" aria-hidden="true">↗</span>
+        <span class="card-status">Explorar</span>
+      </div>
+      <div class="portrait-meta">
+        <span class="portrait-number"></span>
+        <h3></h3>
+        <p></p>
+      </div>
+    </a>
+  </template>
+
+  <script src="assets/gallery.js" defer></script>
+</body>
+</html>
