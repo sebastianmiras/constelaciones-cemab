@@ -63,6 +63,19 @@
       "literatura",
       "educación"
     ]
+  },
+  {
+    "id": "frankel",
+    "name": "Yael Frankel",
+    "role": "Autora e ilustradora · Argentina",
+    "file": "frankel/frankel_constelacion.html",
+    "thumb": "img/frankel.png",
+    "tags": [
+      "Frankel",
+      "Argentina",
+      "álbum ilustrado",
+      "ilustración"
+    ]
   }
 ]
 
