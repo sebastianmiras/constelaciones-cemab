@@ -154,6 +154,19 @@
       "literatura",
       "educación"
     ]
+  },
+  {
+    "id": "valenzuela",
+    "name": "Luisa Valenzuela",
+    "role": "Escritora · Argentina",
+    "file": "valenzuela/valenzuela_constelacion.html",
+    "thumb": "img/valenzuela.png",
+    "tags": [
+      "Valenzuela",
+      "Argentina",
+      "literatura",
+      "educación"
+    ]
   }
 ]
 
