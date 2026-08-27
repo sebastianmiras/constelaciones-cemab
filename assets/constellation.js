@@ -74,10 +74,28 @@
       .text(d => d.label.length > 42 && d.type === "reference" ? `${d.label.slice(0, 40)}…` : d.label);
 
     const simulation = d3.forceSimulation(nodes)
-      .force("link", d3.forceLink(links).id(d => d.id).distance(d => d.relation === "has_category" ? 155 : 80).strength(d => d.relation === "has_category" ? .9 : .65))
-      .force("charge", d3.forceManyBody().strength(d => isInterviewee(d) ? -1000 : d.type === "category" ? -560 : -105))
+      .force(
+        "link",
+        d3.forceLink(links)
+          .id(d => d.id)
+          .distance(d => d.relation === "has_category" ? 165 : 95)
+          .strength(d => d.relation === "has_category" ? .9 : .65)
+      )
+      .force(
+        "charge",
+        d3.forceManyBody()
+          .strength(d =>
+          isInterviewee(d) ? -1050 :
+          d.type === "category" ? -600 :
+          -135
+          )
+      )
       .force("center", d3.forceCenter(width / 2, height / 2))
-      .force("collision", d3.forceCollide().radius(d => d.type === "reference" ? 17 : 35))
+      .force(
+        "collision",
+        d3.forceCollide()
+          .radius(d => d.type === "reference" ? 22 : 38)
+      )
       .force("x", d3.forceX(width / 2).strength(.035))
       .force("y", d3.forceY(height / 2).strength(.035))
       .on("tick", () => {
