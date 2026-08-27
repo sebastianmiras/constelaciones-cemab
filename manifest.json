@@ -5,7 +5,12 @@
     "role": "Escritora · Argentina",
     "file": "andruetto/andruetto_constelacion.html",
     "thumb": "img/andruetto.png",
-    "tags": ["Andruetto", "Argentina", "literatura", "educación"]
+    "tags": [
+      "Andruetto",
+      "Argentina",
+      "literatura",
+      "educación"
+    ]
   },
   {
     "id": "benedetti",
@@ -13,6 +18,25 @@
     "role": "Escritor · Uruguay",
     "file": "benedetti/benedetti_constelacion.html",
     "thumb": "img/benedetti.png",
-    "tags": ["Benedetti", "Uruguay", "literatura", "historia"]
+    "tags": [
+      "Benedetti",
+      "Uruguay",
+      "literatura",
+      "historia"
+    ]
+  },
+  {
+    "id": "eudave",
+    "name": "Cecilia Eudave",
+    "role": "Escritora · México",
+    "file": "eudave/eudave_constelacion.html",
+    "thumb": "img/eudave.png",
+    "tags": [
+      "Eudave",
+      "México",
+      "literatura",
+      "educación"
+    ]
   }
 ]
+
