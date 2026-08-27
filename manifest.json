@@ -1,18 +1,13 @@
 [
   {
-    "id": "benedetti",
-    "name": "Mario Benedetti",
-    "role": "Escritor · Uruguay",
-    "file": "benedetti/benedetti_constelacion.html",
-    "thumb": "img/benedetti.png",
-    "tags": [
-      "Benedetti",
-      "Uruguay",
-      "literatura",
-      "historia"
-    ]
-    "featured": true,
-    "badge": "Modelo didáctico"
+  "id": "benedetti",
+  "name": "Mario Benedetti",
+  "role": "Escritor · Uruguay",
+  "file": "benedetti/benedetti_constelacion.html",
+  "thumb": "img/benedetti.png",
+  "tags": ["Benedetti", "Uruguay", "literatura", "historia"],
+  "featured": true,
+  "badge": "Modelo didáctico"
   },
   {
     "id": "andruetto",
