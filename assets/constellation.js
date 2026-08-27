@@ -78,7 +78,7 @@
         "link",
         d3.forceLink(links)
           .id(d => d.id)
-          .distance(d => d.relation === "has_category" ? 165 : 95)
+          .distance(d => d.relation === "has_category" ? 165 : 110)
           .strength(d => d.relation === "has_category" ? .9 : .65)
       )
       .force(
@@ -87,14 +87,14 @@
           .strength(d =>
           isInterviewee(d) ? -1050 :
           d.type === "category" ? -600 :
-          -135
+          -150
           )
       )
       .force("center", d3.forceCenter(width / 2, height / 2))
       .force(
         "collision",
         d3.forceCollide()
-          .radius(d => d.type === "reference" ? 22 : 38)
+          .radius(d => d.type === "reference" ? 25 : 38)
       )
       .force("x", d3.forceX(width / 2).strength(.035))
       .force("y", d3.forceY(height / 2).strength(.035))
