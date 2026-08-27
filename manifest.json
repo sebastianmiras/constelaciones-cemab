@@ -102,6 +102,19 @@
       "literatura",
       "educación"
     ]
+  },
+  {
+    "id": "glantz",
+    "name": "Margo Glantz",
+    "role": "Escritora · México",
+    "file": "glantz/glantz_constelacion.html",
+    "thumb": "img/glantz.png",
+    "tags": [
+      "Glantz",
+      "México",
+      "literatura",
+      "educación"
+    ]
   }
 ]
 
