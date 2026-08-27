@@ -15,6 +15,13 @@ function draw(items) {
     const visual = card.querySelector(".portrait-visual");
     const image = card.querySelector("img");
     const placeholder = card.querySelector(".portrait-placeholder");
+
+    if (item.featured) {
+    card.classList.add("is-featured");
+    card.querySelector(".card-status").textContent =
+      item.badge || "Modelo didáctico";
+    }
+    
     card.href = item.file;
     card.setAttribute("aria-label", `Explorar la constelación de ${item.name}`);
     card.querySelector(".portrait-number").textContent = String(index + 1).padStart(2, "0");
