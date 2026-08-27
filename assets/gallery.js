@@ -35,7 +35,6 @@ function draw(items) {
     
     card.href = item.file;
     card.setAttribute("aria-label", `Explorar la constelación de ${item.name}`);
-    card.querySelector(".portrait-number").textContent = String(index + 1).padStart(2, "0");
     card.querySelector("h3").textContent = item.name;
     card.querySelector(".portrait-meta p").textContent = item.role || "Entrevista";
     placeholder.dataset.initials = initials(item.name);
