@@ -89,6 +89,19 @@
       "álbum ilustrado",
       "ilustración"
     ]
+  },
+  {
+    "id": "wolf",
+    "name": "Ema Wolf",
+    "role": "Escritora · Argentina",
+    "file": "wolf/wolf_constelacion.html",
+    "thumb": "img/wolf.png",
+    "tags": [
+      "Wolf",
+      "Argentina",
+      "literatura",
+      "educación"
+    ]
   }
 ]
 
