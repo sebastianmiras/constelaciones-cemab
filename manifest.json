@@ -76,6 +76,19 @@
       "álbum ilustrado",
       "ilustración"
     ]
+  },
+  {
+    "id": "soderguit",
+    "name": "Alfredo Soderguit",
+    "role": "Autor e ilustrador · Uruguay",
+    "file": "soderguit/soderguit_constelacion.html",
+    "thumb": "img/soderguit.png",
+    "tags": [
+      "Soderguit",
+      "Uruguay",
+      "álbum ilustrado",
+      "ilustración"
+    ]
   }
 ]
 
