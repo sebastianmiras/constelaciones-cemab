@@ -10,16 +10,27 @@ const initials = name => name.split(/\s+/).filter(Boolean).slice(0, 2).map(word 
 function draw(items) {
   grid.replaceChildren();
   empty.hidden = items.length > 0;
-  items.forEach((item, index) => {
+  let regularIndex = 0;
+
+  items.forEach(item => {
     const card = template.content.firstElementChild.cloneNode(true);
     const visual = card.querySelector(".portrait-visual");
     const image = card.querySelector("img");
     const placeholder = card.querySelector(".portrait-placeholder");
 
     if (item.featured) {
-    card.classList.add("is-featured");
-    card.querySelector(".card-status").textContent =
-      item.badge || "Modelo didáctico";
+      card.classList.add("is-featured");
+      card.querySelector(".card-status").textContent =
+        item.badge || "Modelo didáctico";
+    }
+
+    const number = card.querySelector(".portrait-number");
+
+    if (item.featured) {
+      number.textContent = "";
+    } else {
+      regularIndex += 1;
+      number.textContent = String(regularIndex).padStart(2, "0");
     }
     
     card.href = item.file;
