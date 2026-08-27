@@ -1,18 +1,5 @@
 [
   {
-    "id": "andruetto",
-    "name": "María Teresa Andruetto",
-    "role": "Escritora · Argentina",
-    "file": "andruetto/andruetto_constelacion.html",
-    "thumb": "img/andruetto.png",
-    "tags": [
-      "Andruetto",
-      "Argentina",
-      "literatura",
-      "educación"
-    ]
-  },
-  {
     "id": "benedetti",
     "name": "Mario Benedetti",
     "role": "Escritor · Uruguay",
@@ -23,6 +10,19 @@
       "Uruguay",
       "literatura",
       "historia"
+    ]
+  },
+  {
+    "id": "andruetto",
+    "name": "María Teresa Andruetto",
+    "role": "Escritora · Argentina",
+    "file": "andruetto/andruetto_constelacion.html",
+    "thumb": "img/andruetto.png",
+    "tags": [
+      "Andruetto",
+      "Argentina",
+      "literatura",
+      "educación"
     ]
   },
   {
