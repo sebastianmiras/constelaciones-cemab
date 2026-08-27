@@ -37,6 +37,20 @@
       "literatura",
       "educación"
     ]
+  },
+  {
+    "id": "shua",
+    "name": "Ana María Shua",
+    "role": "Escritora · Argentina",
+    "file": "shua/shua_constelacion.html",
+    "thumb": "img/shua.png",
+    "tags": [
+      "Shua",
+      "Argentina",
+      "literatura",
+      "educación"
+    ]
   }
 ]
+
 
