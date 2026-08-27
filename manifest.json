@@ -115,6 +115,19 @@
       "literatura",
       "educación"
     ]
+  },
+  {
+    "id": "murillo",
+    "name": "Catalina Murillo",
+    "role": "Escritora · Costa Rica",
+    "file": "murillo/murillo_constelacion.html",
+    "thumb": "img/murillo.png",
+    "tags": [
+      "Murillo",
+      "Costa Rica",
+      "literatura",
+      "educación"
+    ]
   }
 ]
 
