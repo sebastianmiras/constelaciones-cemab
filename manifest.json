@@ -141,6 +141,19 @@
       "literatura",
       "educación"
     ]
+  },
+  {
+    "id": "neuman",
+    "name": "Andrés Neuman",
+    "role": "Escritor · Argentina",
+    "file": "neuman/neuman_constelacion.html",
+    "thumb": "img/neuman.png",
+    "tags": [
+      "Neuman",
+      "Argentina",
+      "literatura",
+      "educación"
+    ]
   }
 ]
 
