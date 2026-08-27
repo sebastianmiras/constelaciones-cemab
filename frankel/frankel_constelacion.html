@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b10">
+  <meta name="description" content="Constelación interactiva de la entrevista a Yael Frankel.">
+  <title>Yael Frankel — Constelaciones CEMAB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/constellation.css?v=4">
+</head>
+<body data-nodes="frankel_nodos.csv" data-edges="frankel_aristas.csv" data-youtube="https://youtu.be/-TZcg2A_T90">
+  <header class="graph-header">
+    <a class="back" href="../index.html"><span aria-hidden="true">←</span> Archivo</a>
+    <div class="graph-title"><span>Constelación</span><h1>Yael Frankel</h1></div>
+    <a class="full-video" href="https://youtu.be/-TZcg2A_T90" target="_blank" rel="noopener noreferrer">Entrevista completa <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="graph-shell">
+    <section id="viz" class="viz" aria-label="Grafo interactivo de referencias">
+      <div class="graph-tools">
+        <label class="graph-search">
+          <span class="sr-only">Buscar referencia</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+          <input id="search" type="search" placeholder="Buscar en la constelación…" autocomplete="off">
+        </label>
+        <button id="reset" type="button" title="Volver a encuadrar">Centrar</button>
+      </div>
+      <div class="legend" aria-label="Categorías">
+        <p>Categorías</p>
+        <span><i class="didacticas"></i>Didácticas</span>
+        <span><i class="culturales"></i>Culturales</span>
+        <span><i class="obra"></i>Propia obra</span>
+        <span><i class="biograficas"></i>Biográficas</span>
+      </div>
+      <div id="loading" class="loading"><span></span><p>Trazando relaciones…</p></div>
+      <div id="graph-error" class="graph-error" hidden>No se pudieron cargar los datos de esta constelación.</div>
+    </section>
+
+    <aside id="panel" class="context-panel" aria-live="polite">
+      <div class="panel-index">Referencia seleccionada <span id="panel-count">—</span></div>
+      <div id="panel-empty" class="panel-empty">
+        <span class="panel-star">✦</span>
+        <h2>Explora una voz en relación</h2>
+        <p>Selecciona cualquier referencia del grafo para conocer su contexto y escuchar ese momento de la entrevista.</p>
+      </div>
+      <article id="panel-content" hidden>
+        <p id="panel-category" class="panel-category"></p>
+        <h2 id="panel-title"></h2>
+        <p id="panel-note" class="panel-note"></p>
+        <div class="time-range"><span>Fragmento</span><strong id="panel-time"></strong></div>
+        <a id="panel-youtube" class="time-link" target="_blank" rel="noopener noreferrer">
+          <span class="play" aria-hidden="true">▶</span>
+          <span>Ver este momento</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </article>
+    </aside>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="../assets/constellation.js?v=4"></script>
+</body>
+</html>
+
+
+
+
