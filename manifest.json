@@ -50,7 +50,19 @@
       "literatura",
       "educación"
     ]
+  },
+  {
+    "id": "ferrada",
+    "name": "María José Ferrada",
+    "role": "Escritora · Chile",
+    "file": "ferrada/ferrada_constelacion.html",
+    "thumb": "img/ferrada.png",
+    "tags": [
+      "Ferrada",
+      "Chile",
+      "literatura",
+      "educación"
+    ]
   }
 ]
-
 
