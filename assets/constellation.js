@@ -124,15 +124,13 @@
     document.querySelector("#panel-time").textContent = `${shortTime(d.start_time)} — ${shortTime(d.end_time)}`;
     document.querySelector("#panel-youtube").href = timedUrl(d);
     document.querySelector("#panel").style.setProperty("--node-color", colors[d.group]);
-    const referenceIndex = nodes.filter(node => node.type === "reference").findIndex(node => node.id === d.id) + 1;
-    const referenceTotal = nodes.filter(node => node.type === "reference").length;
-    document.querySelector("#panel-count").textContent = `${String(referenceIndex).padStart(2, "0")} / ${String(referenceTotal).padStart(2, "0")}`;
+    document.querySelector("#panel-count").textContent = d.ref_code || "—";
     nodeEls.classed("match", node => node.id === d.id);
   }
 
   function applySearch(event) {
     const query = normalize(event.target.value.trim());
-    const matches = new Set(nodes.filter(node => !query || normalize(`${node.label} ${node.note} ${node.group}`).includes(query)).map(node => node.id));
+    const matches = new Set(nodes.filter(node => !query || normalize(`${node.ref_code || ""} ${node.label} ${node.note} ${node.group}`).includes(query)).map(node => node.id));
     nodeEls.classed("dim", node => query && !matches.has(node.id));
     labelEls.classed("dim", node => query && !matches.has(node.id));
     linkEls.classed("dim", link => query && !matches.has(link.source.id) && !matches.has(link.target.id));
