@@ -20,30 +20,38 @@ jobs:
         run: |
           from pathlib import Path
 
-          # Root index
+          def insert_after_theme_color(html, favicon_line, path):
+              if 'cemab-favicon.png' in html:
+                  return html, False
+              lines = html.splitlines(keepends=True)
+              for i, line in enumerate(lines):
+                  if '<meta name="theme-color"' in line:
+                      lines.insert(i + 1, favicon_line)
+                      return ''.join(lines), True
+              raise RuntimeError(f'No se encontró theme-color en {path}')
+
           index = Path('index.html')
           html = index.read_text(encoding='utf-8')
-          favicon = '  <link rel="icon" type="image/png" href="assets/cemab-favicon.png">\n'
-          if 'cemab-favicon.png' not in html:
-              marker = '  <meta name="theme-color" content="#090b10">\n'
-              if marker not in html:
-                  raise RuntimeError('No se encontró el punto de inserción en index.html')
-              html = html.replace(marker, marker + favicon)
+          html, changed = insert_after_theme_color(
+              html,
+              '  <link rel="icon" type="image/png" href="assets/cemab-favicon.png">\n',
+              index
+          )
+          if changed:
               index.write_text(html, encoding='utf-8')
 
-          # Individual constellation pages
-          changed = 0
+          count = 0
           for path in Path('.').glob('*/*_constelacion.html'):
               html = path.read_text(encoding='utf-8')
-              if 'cemab-favicon.png' in html:
-                  continue
-              marker = '  <meta name="theme-color" content="#090b10">\n'
-              if marker not in html:
-                  raise RuntimeError(f'No se encontró el punto de inserción en {path}')
-              html = html.replace(marker, marker + '  <link rel="icon" type="image/png" href="../assets/cemab-favicon.png">\n')
-              path.write_text(html, encoding='utf-8')
-              changed += 1
-          print(f'Constelaciones actualizadas: {changed}')
+              html, changed = insert_after_theme_color(
+                  html,
+                  '  <link rel="icon" type="image/png" href="../assets/cemab-favicon.png">\n',
+                  path
+              )
+              if changed:
+                  path.write_text(html, encoding='utf-8')
+                  count += 1
+          print(f'Constelaciones actualizadas: {count}')
 
       - name: Commit favicon links
         run: |
