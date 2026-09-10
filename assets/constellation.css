@@ -42,7 +42,7 @@ body { margin: 0; color: var(--text); background: var(--bg); font-family: "Manro
 .legend i { display: block; width: 7px; height: 7px; border-radius: 50%; }
 .legend .didacticas { background: var(--didacticas); }.legend .culturales { background: var(--culturales); }.legend .obra { background: var(--obra); }.legend .biograficas { background: var(--biograficas); }
 .context-panel { position: relative; z-index: 2; background: var(--panel); border-left: 1px solid var(--line); padding: 28px; overflow-y: auto; }
-.panel-index { display: flex; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid var(--line); color: var(--muted); font: 9px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .1em; }
+.panel-index { display: flex; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid var(--line); color: var(--text); font: 500 12px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .12em; }
 .panel-empty { min-height: calc(100% - 40px); display: flex; flex-direction: column; justify-content: center; }
 .panel-star { color: var(--acid); font-size: 26px; margin-bottom: 24px; }
 .panel-empty h2, #panel-title { margin: 0; font: 400 39px/1.02 "Newsreader", serif; letter-spacing: -.035em; }
