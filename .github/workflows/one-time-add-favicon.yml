@@ -1,0 +1,58 @@
+name: One-time add CEMAB favicon
+
+on:
+  push:
+    paths:
+      - '.github/workflows/one-time-add-favicon.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  add-favicon:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add favicon links to site HTML
+        shell: python
+        run: |
+          from pathlib import Path
+
+          # Root index
+          index = Path('index.html')
+          html = index.read_text(encoding='utf-8')
+          favicon = '  <link rel="icon" type="image/png" href="assets/cemab-favicon.png">\n'
+          if 'cemab-favicon.png' not in html:
+              marker = '  <meta name="theme-color" content="#090b10">\n'
+              if marker not in html:
+                  raise RuntimeError('No se encontró el punto de inserción en index.html')
+              html = html.replace(marker, marker + favicon)
+              index.write_text(html, encoding='utf-8')
+
+          # Individual constellation pages
+          changed = 0
+          for path in Path('.').glob('*/*_constelacion.html'):
+              html = path.read_text(encoding='utf-8')
+              if 'cemab-favicon.png' in html:
+                  continue
+              marker = '  <meta name="theme-color" content="#090b10">\n'
+              if marker not in html:
+                  raise RuntimeError(f'No se encontró el punto de inserción en {path}')
+              html = html.replace(marker, marker + '  <link rel="icon" type="image/png" href="../assets/cemab-favicon.png">\n')
+              path.write_text(html, encoding='utf-8')
+              changed += 1
+          print(f'Constelaciones actualizadas: {changed}')
+
+      - name: Commit favicon links
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html */*_constelacion.html
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Add CEMAB favicon to site pages"
+          git push origin HEAD:main
