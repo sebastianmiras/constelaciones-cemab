@@ -1,0 +1,39 @@
+name: One-time refresh favicon
+
+on:
+  push:
+    paths:
+      - '.github/workflows/one-time-refresh-favicon.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-favicon:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Force favicon cache refresh
+        shell: python
+        run: |
+          from pathlib import Path
+          files = [Path('index.html'), *Path('.').glob('*/*_constelacion.html')]
+          changed = 0
+          for path in files:
+              html = path.read_text(encoding='utf-8')
+              old = 'rel="icon" type="image/png" href="'
+              if old not in html:
+                  raise RuntimeError(f'No se encontró favicon en {path}')
+              html2 = html.replace('rel="icon" type="image/png" href="assets/cemab-favicon.png"', 'rel="icon" type="image/png" sizes="64x64" href="assets/cemab-favicon.png?v=2"')
+              html2 = html2.replace('rel="icon" type="image/png" href="../assets/cemab-favicon.png"', 'rel="icon" type="image/png" sizes="64x64" href="../assets/cemab-favicon.png?v=2"')
+              if html2 != html:
+                  path.write_text(html2, encoding='utf-8')
+                  changed += 1
+          print(f'HTML actualizados: {changed}')
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html */*_constelacion.html
+          git commit -m "Force favicon cache refresh"
+          git push origin HEAD:main
