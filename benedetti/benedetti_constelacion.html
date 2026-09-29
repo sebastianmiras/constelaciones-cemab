@@ -10,11 +10,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/constellation.css?v=4">
+  <link rel="stylesheet" href="../assets/constellation.css?v=5">
 </head>
 <body
   data-nodes="benedetti_nodos.csv"
   data-edges="benedetti_aristas.csv"
+  data-expansion-nodes="benedetti_aportaciones_nodos.csv"
+  data-expansion-edges="benedetti_aportaciones_aristas.csv"
   data-youtube="https://youtu.be/ury4cY3rRKM"
   data-youtube-secondary="https://youtu.be/BPUMZH_M9aM"
   data-secondary-start="00:26:50">
@@ -37,12 +39,18 @@
         </label>
         <button id="reset" type="button" title="Volver a encuadrar">Centrar</button>
       </div>
+      <section id="contribution-panel" class="contribution-panel" aria-label="Aportaciones del alumnado" hidden>
+        <h2>Aportaciones del alumnado</h2>
+        <p>Activa un grupo para mostrar sus nuevas conexiones.</p>
+        <div id="contribution-groups" class="contribution-groups"></div>
+      </section>
       <div class="legend" aria-label="Categorías">
         <p>Categorías</p>
         <span><i class="didacticas"></i>Didácticas</span>
         <span><i class="culturales"></i>Culturales</span>
         <span><i class="obra"></i>Propia obra</span>
         <span><i class="biograficas"></i>Biográficas</span>
+        <span><i class="aportaciones"></i>Aportaciones</span>
       </div>
       <div id="loading" class="loading"><span></span><p>Trazando relaciones…</p></div>
       <div id="graph-error" class="graph-error" hidden>No se pudieron cargar los datos de esta constelación.</div>
@@ -59,10 +67,10 @@
         <p id="panel-category" class="panel-category"></p>
         <h2 id="panel-title"></h2>
         <p id="panel-note" class="panel-note"></p>
-        <div class="time-range"><span>Fragmento</span><strong id="panel-time"></strong></div>
+        <div id="panel-time-range" class="time-range"><span>Fragmento</span><strong id="panel-time"></strong></div>
         <a id="panel-youtube" class="time-link" target="_blank" rel="noopener noreferrer">
           <span class="play" aria-hidden="true">▶</span>
-          <span>Ver este momento</span>
+          <span id="panel-link-label">Ver este momento</span>
           <span aria-hidden="true">↗</span>
         </a>
       </article>
@@ -70,6 +78,6 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-  <script src="../assets/constellation.js?v=4"></script>
+  <script src="../assets/constellation.js?v=5"></script>
 </body>
 </html>

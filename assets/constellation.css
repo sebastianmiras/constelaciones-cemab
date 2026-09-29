@@ -9,6 +9,7 @@
   --culturales: #ff694e;
   --obra: #9580ff;
   --biograficas: #5cc8ff;
+  --aportaciones: #ff4fd8;
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -30,6 +31,15 @@ body { margin: 0; color: var(--text); background: var(--bg); font-family: "Manro
 .viz svg { position: relative; z-index: 1; display: block; width: 100%; height: 100%; }
 .graph-tools { position: absolute; z-index: 3; top: 22px; left: 24px; right: 24px; display: flex; justify-content: space-between; gap: 15px; pointer-events: none; }
 .graph-tools > * { pointer-events: auto; }
+.contribution-panel { position: absolute; z-index: 3; top: 82px; left: 24px; width: min(250px, calc(100% - 48px)); padding: 13px; border: 1px solid var(--line); background: rgba(17,20,27,.92); backdrop-filter: blur(12px); }
+.contribution-panel h2 { margin: 0 0 5px; color: var(--muted); font: 9px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .1em; }
+.contribution-panel > p { margin: 0 0 11px; color: #b5b7bd; font-size: 11px; line-height: 1.45; }
+.contribution-groups { display: grid; gap: 7px; }
+.contribution-toggle { width: 100%; min-height: 38px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 9px; padding: 8px 10px; border: 1px solid var(--line); color: var(--text); background: rgba(9,11,16,.66); cursor: pointer; text-align: left; font: 10px "DM Mono", monospace; }
+.contribution-toggle:hover, .contribution-toggle.active { border-color: var(--aportaciones); }
+.contribution-toggle.active { background: rgba(255,79,216,.1); }
+.contribution-toggle small { color: var(--muted); font: 9px "DM Mono", monospace; }
+.contribution-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--aportaciones); box-shadow: 0 0 0 3px rgba(255,79,216,.12); }
 .graph-search { width: min(340px, calc(100% - 90px)); display: flex; align-items: center; gap: 10px; background: rgba(17,20,27,.88); border: 1px solid var(--line); padding: 11px 13px; backdrop-filter: blur(12px); }
 .graph-search svg { width: 15px; fill: none; stroke: currentColor; stroke-width: 1.5; }
 .graph-search input { width: 100%; border: 0; outline: 0; color: inherit; background: transparent; font: 11px "DM Mono", monospace; }
@@ -41,6 +51,7 @@ body { margin: 0; color: var(--text); background: var(--bg); font-family: "Manro
 .legend span { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
 .legend i { display: block; width: 7px; height: 7px; border-radius: 50%; }
 .legend .didacticas { background: var(--didacticas); }.legend .culturales { background: var(--culturales); }.legend .obra { background: var(--obra); }.legend .biograficas { background: var(--biograficas); }
+.legend .aportaciones { background: var(--aportaciones); }
 .context-panel { position: relative; z-index: 2; background: var(--panel); border-left: 1px solid var(--line); padding: 28px; overflow-y: auto; }
 .panel-index { display: flex; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid var(--line); color: var(--text); font: 500 12px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .12em; }
 .panel-empty { min-height: calc(100% - 40px); display: flex; flex-direction: column; justify-content: center; }
@@ -59,9 +70,13 @@ body { margin: 0; color: var(--text); background: var(--bg); font-family: "Manro
 .loading p { color: var(--muted); font: 9px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .1em; }.loading.done { opacity: 0; pointer-events: none; }
 .graph-error { position: absolute; z-index: 6; inset: 0; display: grid; place-items: center; color: var(--muted); }
 .link { stroke: #737b8b; stroke-opacity: .35; }.link.category-link { stroke-opacity: .7; }
+.link.contribution-link { stroke: var(--aportaciones); stroke-opacity: .72; stroke-dasharray: 4 4; }
 .node { cursor: pointer; stroke: var(--bg); stroke-width: 2px; transition: opacity .2s; }.node:hover { stroke: var(--text); stroke-width: 2.5px; }
+.node.contribution-node { stroke: rgba(255,255,255,.2); }
 .node-label { fill: #d9d9d5; font: 9px "DM Mono", monospace; pointer-events: none; paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
+.node-label.contribution-label { fill: #ffd6f6; }
 .category-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; }.interviewee-label { font: 400 18px "Newsreader", serif; }
+.contribution-hidden { display: none !important; pointer-events: none !important; }
 .dim { opacity: .09 !important; }.match { stroke: var(--text); stroke-width: 4px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -69,7 +84,8 @@ body { margin: 0; color: var(--text); background: var(--bg); font-family: "Manro
   body { overflow: auto; }
   .graph-header { grid-template-columns: auto 1fr auto; padding: 0 15px; }.graph-title h1 { font-size: 19px; }.full-video { font-size: 0; }.full-video span { font-size: 15px; }.video-parts { gap: 8px; }
   .graph-shell { grid-template-columns: 1fr; grid-template-rows: 62vh auto; height: auto; }.viz { min-height: 500px; }.context-panel { border-left: 0; border-top: 1px solid var(--line); min-height: 38vh; }.panel-empty { min-height: 300px; }.legend { max-width: calc(100% - 48px); overflow-x: auto; }.legend p { display: none; }
+  .contribution-panel { top: 78px; }
 }
-@media (max-width: 500px) { .graph-title span { display: none; }.graph-title h1 { font-size: 17px; }.legend { gap: 10px; }.legend span { font-size: 0; }.legend span i { width: 10px; height: 10px; }.context-panel { padding: 22px; } }
+@media (max-width: 500px) { .graph-title span { display: none; }.graph-title h1 { font-size: 17px; }.legend { gap: 10px; }.legend span { font-size: 0; }.legend span i { width: 10px; height: 10px; }.context-panel { padding: 22px; }.contribution-panel { width: 205px; }.contribution-panel > p { display: none; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
 
